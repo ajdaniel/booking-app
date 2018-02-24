@@ -1,0 +1,25 @@
+.seat {
+    border: 1px solid darkgreen;
+    background-color: lightseagreen;
+    color: darkgreen;
+    width: 2rem;
+    height: 2rem;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.seat[disabled] {
+    background-color: lightcoral;
+    border-color: red;
+    color: red;
+    cursor: not-allowed;
+}
+
+.booking {
+    display: flex;
+    flex-direction: row;
+}
+
+.booking--info {
+    flex-grow: 1;
+}
