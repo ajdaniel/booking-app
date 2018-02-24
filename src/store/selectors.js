@@ -1,0 +1,1 @@
+export const allEvents = state => state.events.allIds.map(id => state.events.byId[id]);

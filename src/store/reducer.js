@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import * as Types from './actionTypes';
 
 const defaultEvents = {
     loading: false,
@@ -7,7 +8,20 @@ const defaultEvents = {
 }
 
 const events = (state = defaultEvents, action) => {
-    return state;
+    switch(action.type) {
+        case Types.FETCH_EVENTS_SUCCESS:
+            const { byId } = state;
+            action.events.forEach(event => {
+                byId[event.id] = event;
+            });
+            return {
+                ...state,
+                byId,
+                allIds: action.events.map(event => event.id)
+            }
+        default:
+            return state;
+    }
 }
 
 const reducers = combineReducers({
