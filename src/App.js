@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 import './App.css';
-import EventList from './pages/Events/EventList'; // todo: use index here?
+import Events from './pages/Events/Events'; // todo: use index here?
 
 class App extends Component {
   render() {
@@ -23,7 +23,7 @@ class App extends Component {
                 <Route exact={true} path="/" render={() => (
                     <h1>Welcome to the Eastleigh Tech Events!</h1>
                 )} />
-                <Route path="/events/:id?" component={EventList}></Route>
+                <Route path="/events/:id?" component={Events}></Route>
             </div>
         </Router>
     );
