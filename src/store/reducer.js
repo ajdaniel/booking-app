@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
 
-const events = (state = {}, action) => {
+const defaultEvents = {
+    loading: false,
+    byId: {}, // key the events by ID
+    allIds: [] // Array of IDs
+}
+
+const events = (state = defaultEvents, action) => {
     return state;
 }
 
