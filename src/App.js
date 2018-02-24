@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <Router>
+            <div>
+                <header className="ete-header">
+                    <span><Link to="/">Eastleigh Tech Events</Link></span>
+                    <ul className="ete-header--links">
+                        <li className="ete-header--link">
+                            <Link to="/events">events</Link>
+                        </li>
+                        <li className="ete-header--link">
+                            <Link to="/me">my events</Link>
+                        </li>
+                    </ul>
+                </header>
+                <Route exact={true} path="/" render={() => (
+                    <h1>Welcome to the Eastleigh Tech Events!</h1>
+                )} />
+            </div>
+        </Router>
     );
   }
 }
