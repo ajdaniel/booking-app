@@ -32,7 +32,8 @@ class Events extends Component {
                         <ul>
                             { events && events.map(event => (
                                 <li key={event.id}>
-                                    <Link to={`/events/${event.id}`}>{event.name} - ({event.seatsBooked.length}% booked)</Link>
+                                    <span>{event.name} - ({event.seatsBooked.length}% booked)</span>
+                                    <Link to={`/events/${event.id}`}>book</Link>
                                 </li>
                             ))}
                         </ul>
