@@ -65,7 +65,7 @@ class Event extends Component {
         const seatsChosen = this.state.seatsChosen.map(seat => {
             if (seat.id === seatId) {
                 // perhaps do this via the server?
-                const isNameUsed = this.props.event.seatsBooked.some(booking => booking.name === name);
+                let isNameUsed = this.props.event.seatsBooked.some(booking => booking.name === name);
                 // compare against other names in the booking
                 isNameUsed = isNameUsed || this.state.seatsChosen.some(booking => booking.id !== seatId && booking.name === name);
                 let nameInvalidText;
