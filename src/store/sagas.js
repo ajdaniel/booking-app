@@ -30,10 +30,20 @@ function* watchFetchUserEvents() {
     yield takeEvery(Types.FETCH_USER_EVENTS, fetchUserEvents);
 }
 
+function* cancelBooking(action) {
+    const event = yield call(api.cancelBooking, action.eventId, action.name, action.email);
+    yield put(actions.cancelBookingSuccess(event));
+}
+
+function* watchCancelBooking() {
+    yield takeEvery(Types.CANCEL_BOOKING, cancelBooking);
+}
+
 export default function* rootSaga() {
     yield all([
         watchFetchEvents(),
         watchBookSeats(),
-        watchFetchUserEvents()
+        watchFetchUserEvents(),
+        watchCancelBooking()
     ])
 }

@@ -10,6 +10,8 @@ const defaultEvents = {
 
 const events = (state = defaultEvents, action) => {
     switch(action.type) {
+        case Types.FETCH_USER_EVENTS:
+            return {...state, loading: true };
         case Types.FETCH_USER_EVENTS_SUCCESS:
             const newById = state.byId;
             action.events.forEach(event => {
@@ -17,8 +19,21 @@ const events = (state = defaultEvents, action) => {
             });
             return {
                 ...state,
+                loading: false,
                 byId: newById,
                 userEventsIds: action.events.map(event => event.id)
+            }
+        case Types.CANCEL_BOOKING:
+            return {...state, loading: true };
+        case Types.CANCEL_BOOKING_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                byId: {
+                    ...state.byId,
+                    [action.event.id]: action.event
+                },
+                userEventsIds: state.userEventsIds.filter(id => id !== action.event.id)
             }
         case Types.FETCH_EVENTS:
             return {

@@ -22,8 +22,12 @@ class Me extends Component {
         this.props.actions.fetchUserEvents(this.state.userName, this.state.userEmail);
     }
 
+    cancelBooking = (eventId) => {
+        this.props.actions.cancelBooking(eventId, this.state.userName, this.state.userEmail);
+    }
+
     render() {
-        const { userEvents } = this.props;
+        const { userEvents, isLoading } = this.props;
         const { userEmail, userName } = this.state;
 
         return (
@@ -37,16 +41,19 @@ class Me extends Component {
                 </div>
                 <button onClick={this.fetchEventsForUser}>Find Events</button>
 
-                {userEvents.length > 0 && (
+                { isLoading ? <p>loading...</p> : (
+                userEvents.length > 0 ? (
                     <div>
                         <h3>{userEvents.length} event(s) found</h3>
                         <ul>
                             {userEvents.map(event => (
-                                <li key={event.id}>{event.name}</li>
+                                <li key={event.id}>{event.name} <button onClick={() => this.cancelBooking(event.id)}>cancel booking</button></li>
                             ))}
                         </ul>
                     </div>
-                )}
+                ) : (
+                    <h1>No user events found for user details</h1>
+                ))}
             </section>
         )
     }

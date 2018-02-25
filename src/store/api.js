@@ -45,8 +45,25 @@ export const bookSeats = (eventId, seats) => {
     });
 }
 
-export const getUserEvents = (userEmail, userName) => {
+export const getUserEvents = (userName, userEmail) => {
     return delay().then(() => {
-        return events.filter(event => !event.seatsBooked.some(booking => booking.name === userName && booking.email === userEmail));
+        return events.filter(event => event.seatsBooked.some(booking => booking.name === userName && booking.email === userEmail));
     });
+}
+
+export const cancelBooking = (eventId, userName, userEmail) => {
+    return delay().then(() => {
+        events = events.map(event => {
+            if (event.id === eventId) {
+                return {
+                    ...event,
+                    seatsBooked: event.seatsBooked.filter(booking => booking.email !== userEmail && booking.name !== userName)
+                }
+            } else {
+                return event;
+            }
+        });
+
+        return events.find(event => event.id === eventId);
+    })
 }
