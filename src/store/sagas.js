@@ -12,8 +12,18 @@ function* watchFetchEvents() {
     yield takeEvery(Types.FETCH_EVENTS, fetchEvents);
 }
 
+function* bookSeats(action) {
+    yield call(api.bookSeats, action.eventId, action.seats);
+    yield put(actions.fetchEvents());
+}
+
+function* watchBookSeats() {
+    yield takeEvery(Types.BOOK_SEATS, bookSeats);
+}
+
 export default function* rootSaga() {
     yield all([
-        watchFetchEvents()
+        watchFetchEvents(),
+        watchBookSeats()
     ])
 }

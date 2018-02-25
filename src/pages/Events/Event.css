@@ -8,11 +8,17 @@
     cursor: pointer;
 }
 
-.seat[disabled] {
+.seat.booked {
     background-color: lightcoral;
     border-color: red;
     color: red;
     cursor: not-allowed;
+}
+
+.seat.chosen {
+    background-color: lightblue;
+    border-color: darkblue;
+    color: darkblue;
 }
 
 .booking {
@@ -22,4 +28,9 @@
 
 .booking--info {
     flex-grow: 1;
+}
+
+input.invalid {
+    border: 1px solid red;
+    background-color: lightcoral;
 }

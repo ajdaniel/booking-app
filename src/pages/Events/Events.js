@@ -14,6 +14,10 @@ class Events extends Component {
         this.props.actions.fetchEvents();
     }
 
+    handleBooking = (eventId, seats) => {
+        this.props.actions.bookSeats(eventId, seats);
+    }
+
     render() {
         const { events, isLoading, match } = this.props;
 
@@ -26,7 +30,7 @@ class Events extends Component {
             <section>
                 { isLoading && <p>loading...</p>}
                 { event ? 
-                    ( <Event event={event} />) :
+                    ( <Event event={event} onBook={seats => this.handleBooking(event.id, seats)} />) :
                     (<div>
                         <h1>Upcoming events</h1>
                         <ul>
