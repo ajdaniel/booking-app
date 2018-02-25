@@ -21,9 +21,19 @@ function* watchBookSeats() {
     yield takeEvery(Types.BOOK_SEATS, bookSeats);
 }
 
+function* fetchUserEvents(action) {
+    const userEvents = yield call(api.getUserEvents, action.name, action.email);
+    yield put(actions.fetchUserEventsSuccess(userEvents));
+}
+
+function* watchFetchUserEvents() {
+    yield takeEvery(Types.FETCH_USER_EVENTS, fetchUserEvents);
+}
+
 export default function* rootSaga() {
     yield all([
         watchFetchEvents(),
-        watchBookSeats()
+        watchBookSeats(),
+        watchFetchUserEvents()
     ])
 }

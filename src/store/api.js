@@ -44,3 +44,9 @@ export const bookSeats = (eventId, seats) => {
         return events;
     });
 }
+
+export const getUserEvents = (userEmail, userName) => {
+    return delay().then(() => {
+        return events.filter(event => !event.seatsBooked.some(booking => booking.name === userName && booking.email === userEmail));
+    });
+}

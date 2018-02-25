@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 import './App.css';
 import Events from './pages/Events/Events'; // todo: use index here?
+import Me from './pages/Me/Me';
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
                     <h1>Welcome to the Eastleigh Tech Events!</h1>
                 )} />
                 <Route path="/events/:id?" component={Events}></Route>
+                <Route path="/me" component={Me}></Route>
             </div>
         </Router>
     );
