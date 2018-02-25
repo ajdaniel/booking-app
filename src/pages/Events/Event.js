@@ -18,6 +18,10 @@ class Event extends Component {
     }
 
     handleSeatBooked = (seatId) => {
+        // Only allow 4 bookings
+        if (this.state.seatsChosen.length >= 4) {
+            return;
+        }
         // if the seat is already chosen, remove it
         if (this.state.seatsChosen.some(seat => seat.id === seatId)) {
             this.setState({
@@ -40,7 +44,9 @@ class Event extends Component {
         const seatsChosen = this.state.seatsChosen.map(seat => {
             if (seat.id === seatId) {
                 // perhaps do this via the server?
-                const isEmailUsed = this.props.event.seatsBooked.some(booking => booking.email === email);
+                let isEmailUsed = this.props.event.seatsBooked.some(booking => booking.email === email);
+                // compare other emails used in the booking
+                isEmailUsed = isEmailUsed || this.state.seatsChosen.some(booking => booking.id !== seatId && booking.email === email);
                 let emailInvalidText;
                 if (isEmailUsed) {
                     emailInvalidText = 'This email has already been used for a booking, please provide another';
@@ -60,6 +66,8 @@ class Event extends Component {
             if (seat.id === seatId) {
                 // perhaps do this via the server?
                 const isNameUsed = this.props.event.seatsBooked.some(booking => booking.name === name);
+                // compare against other names in the booking
+                isNameUsed = isNameUsed || this.state.seatsChosen.some(booking => booking.id !== seatId && booking.name === name);
                 let nameInvalidText;
                 if (isNameUsed) {
                     nameInvalidText = 'This name has already been used for a booking, please provide another';
