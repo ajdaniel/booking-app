@@ -18,16 +18,12 @@ class Event extends Component {
     }
 
     handleSeatBooked = (seatId) => {
-        // Only allow 4 bookings
-        if (this.state.seatsChosen.length >= 4) {
-            return;
-        }
         // if the seat is already chosen, remove it
         if (this.state.seatsChosen.some(seat => seat.id === seatId)) {
             this.setState({
                 seatsChosen: this.state.seatsChosen.filter(seat => seat.id !== seatId)
             });
-        } else {
+        } else if (this.state.seatsChosen.length < 4) {
             this.setState({
                 seatsChosen: [...this.state.seatsChosen, {
                     id: seatId,
